@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "id": "amber_draw",
+      "name": "かさねてお絵描き‼",
+      "titleImage": "/assets/app-titles/amber_draw.png",
+      "description": "みんなで分割してお絵描き",
+      "url": "https://just1ssue.github.io/Amber_Draw/",
+      "icon": "🎨",
+      "tags": [
+        "game",
+        "collab"
+      ],
+      "order": 10
+    },
+    {
+      "id": "amber_tier",
+      "name": "みんなでTierList‼",
+      "titleImage": "/assets/app-titles/amber_tier.png",
+      "description": "複数人でTierリストを作成、編集",
+      "url": "https://just1ssue.github.io/tierlist-collab/",
+      "icon": "🏆",
+      "tags": [
+        "game",
+        "collab"
+      ],
+      "order": 20
+    },
+    {
+      "id": "amber_true",
+      "name": "悪魔でそれ不正解",
+      "titleImage": "/assets/app-titles/amber_true.png",
+      "description": "お題にみんなで解答し、一番ダサいやつを決めよう",
+      "url": "https://just1ssue.github.io/Amber_True/",
+      "icon": "🫵",
+      "tags": [
+        "game",
+        "collab"
+      ],
+      "order": 30
+    }
+  ]
+}
