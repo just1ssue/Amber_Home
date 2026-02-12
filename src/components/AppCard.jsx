@@ -46,6 +46,21 @@ export default function AppCard({ app, isFavorite, onToggleFavorite, onOpen }) {
     >
       <div className="cardHead">
         <div className="cardIcon">{app.icon ?? "🔗"}</div>
+
+        <div className="cardTitleArea">
+          {showTitleImage ? (
+            <img
+              className="cardTitleImage"
+              src={titleImage}
+              alt={app.name}
+              loading="lazy"
+              onError={() => setTitleImageError(true)}
+            />
+          ) : (
+            <div className="cardName">{app.name}</div>
+          )}
+        </div>
+
         <button
           className={`favBtn ${isFavorite ? "isFav" : ""}`}
           type="button"
@@ -62,21 +77,7 @@ export default function AppCard({ app, isFavorite, onToggleFavorite, onOpen }) {
           {isFavorite ? "★" : "☆"}
         </button>
       </div>
-
-      <div className="cardTitleArea">
-        {showTitleImage ? (
-          <img
-            className="cardTitleImage"
-            src={titleImage}
-            alt={app.name}
-            loading="lazy"
-            onError={() => setTitleImageError(true)}
-          />
-        ) : (
-          <div className="cardName">{app.name}</div>
-        )}
-        {app.description ? <div className="cardDesc">{app.description}</div> : null}
-      </div>
+      {app.description ? <div className="cardDesc">{app.description}</div> : null}
     </div>
   );
 }
