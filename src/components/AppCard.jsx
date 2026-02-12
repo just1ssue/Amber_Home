@@ -12,7 +12,7 @@ function resolveTitleImageSrc(raw) {
   return raw;
 }
 
-export default function AppCard({ app, isFavorite, onToggleFavorite, onOpen }) {
+export default function AppCard({ app, onOpen, variant = "default" }) {
   const titleImage = resolveTitleImageSrc(app.titleImage ?? app.titleImageUrl ?? app.title_image ?? "");
   const [titleImageError, setTitleImageError] = useState(false);
 
@@ -21,6 +21,7 @@ export default function AppCard({ app, isFavorite, onToggleFavorite, onOpen }) {
   }, [app.id, titleImage]);
 
   const showTitleImage = Boolean(titleImage) && !titleImageError;
+  const isCompact = variant === "compact";
   const linkLabel = `${app.name} を開く`;
 
   function openApp(event) {
@@ -37,47 +38,40 @@ export default function AppCard({ app, isFavorite, onToggleFavorite, onOpen }) {
 
   return (
     <div
-      className="card cardLink"
+      className={`card cardLink ${isCompact ? "cardCompact" : ""}`}
       role="link"
       tabIndex={0}
       aria-label={linkLabel}
       onClick={openApp}
       onKeyDown={onCardKeyDown}
     >
-      <div className="cardHead">
-        <div className="cardIcon">{app.icon ?? "🔗"}</div>
+      {isCompact ? (
+        <>
+          <div className="cardName cardNameCompact">{app.name}</div>
+          {app.description ? <div className="cardDesc">{app.description}</div> : null}
+        </>
+      ) : (
+        <>
+          <div className="cardHead">
+            <div className="cardIcon">{app.icon ?? "🔗"}</div>
 
-        <div className="cardTitleArea">
-          {showTitleImage ? (
-            <img
-              className="cardTitleImage"
-              src={titleImage}
-              alt={app.name}
-              loading="lazy"
-              onError={() => setTitleImageError(true)}
-            />
-          ) : (
-            <div className="cardName">{app.name}</div>
-          )}
-        </div>
-
-        <button
-          className={`favBtn ${isFavorite ? "isFav" : ""}`}
-          type="button"
-          aria-label="favorite"
-          onClick={(event) => {
-            event.stopPropagation();
-            onToggleFavorite(app.id);
-          }}
-          onKeyDown={(event) => {
-            event.stopPropagation();
-          }}
-          title="お気に入り"
-        >
-          {isFavorite ? "★" : "☆"}
-        </button>
-      </div>
-      {app.description ? <div className="cardDesc">{app.description}</div> : null}
+            <div className="cardTitleArea">
+              {showTitleImage ? (
+                <img
+                  className="cardTitleImage"
+                  src={titleImage}
+                  alt={app.name}
+                  loading="lazy"
+                  onError={() => setTitleImageError(true)}
+                />
+              ) : (
+                <div className="cardName">{app.name}</div>
+              )}
+            </div>
+          </div>
+          {app.description ? <div className="cardDesc">{app.description}</div> : null}
+        </>
+      )}
     </div>
   );
 }
